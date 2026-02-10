@@ -1,0 +1,26 @@
+# App of Apps
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform-root
+  namespace: argocd  # ArgoCD's namespace
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  # Ensures children are deleted when parent is deleted
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/DAWS-82S/eks-cluster-argocd.git
+    targetRevision: main   # or a tag/commit hash
+    path: applications        # folder in repo with Kubernetes YAMLs
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true           # delete resources not in Git
+      selfHeal: true        # revert out-of-band changes
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+      - PruneLast=true

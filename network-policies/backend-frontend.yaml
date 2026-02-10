@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend-allow-frontend
+  namespace: pavan  # Change to your namespace
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+      tier: backend
+      project: pavan
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: frontend
+              tier: web
+              project: pavan
+      ports:
+        - protocol: TCP
+          port: 8080
