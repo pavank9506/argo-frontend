@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/DAWS-82S/eks-cluster-argocd.git
+    repoURL: https://github.com/pavank9506/argo-frontend.git
     targetRevision: main   # or a tag/commit hash
     path: network-policies        # folder in repo with Kubernetes YAMLs
   destination:
