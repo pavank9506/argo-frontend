@@ -6,8 +6,8 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: backend
-      tier: backend
+      app: frontend
+      tier: web
       project: pavan
   policyTypes:
     - Ingress
@@ -15,7 +15,7 @@ spec:
     - from:
         - podSelector:
             matchLabels:
-              app: frontend
+              app: backend
               tier: web
               project: pavan
       ports:
